@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">mesgaging</string>
+    <string name="tagline">QR-Exclusive Chaos Chat</string>
+    <string name="channels_header">CHANNELS</string>
+    <string name="direct_messages">DIRECT MESSAGES</string>
+    <string name="online_members">ONLINE MEMBERS</string>
+    <string name="my_qr_code">My QR Pass</string>
+    <string name="scan_qr">Scan QR</string>
+    <string name="saved_texts">Saved Texts</string>
+    <string name="effects_hub">Effects Lab</string>
+    <string name="message_placeholder">Message #%1$s (arm effects below)...</string>
+    <string name="spam_effect">SPAM</string>
+    <string name="tts_play">Play TTS</string>
+    <string name="effect_fire">Inferno</string>
+    <string name="effect_shake">Earthquake</string>
+    <string name="effect_explode">Explosion</string>
+    <string name="effect_glitch">Glitch</string>
+    <string name="effect_bass">Bass Boost</string>
+    <string name="effect_wobble">Wobble</string>
+    <string name="effect_chonk">Mega Chonk</string>
+    <string name="effect_tts">TTS Active</string>
+    <string name="effect_alert">Red Alert</string>
+    <string name="copy_qr">Copy QR Invite</string>
+    <string name="connect_success">Connected to %1$s via QR!</string>
+    <string name="saved_text_success">Saved to Text Vault!</string>
+</resources>

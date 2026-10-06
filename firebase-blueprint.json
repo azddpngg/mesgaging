@@ -1,0 +1,52 @@
+{
+  "entities": {
+    "Message": {
+      "properties": {
+        "id": { "type": "string" },
+        "channelId": { "type": "string" },
+        "senderId": { "type": "string" },
+        "senderName": { "type": "string" },
+        "senderAvatar": { "type": "string" },
+        "senderColor": { "type": "number" },
+        "text": { "type": "string" },
+        "photoUri": { "type": "string", "optional": true },
+        "fileName": { "type": "string", "optional": true },
+        "fileSize": { "type": "string", "optional": true },
+        "fileUri": { "type": "string", "optional": true },
+        "timestamp": { "type": "number" },
+        "effects": { "type": "array", "items": { "type": "string" } },
+        "reactions": { "type": "map" },
+        "spamMultiplier": { "type": "number" },
+        "isSaved": { "type": "boolean" }
+      },
+      "required": ["id", "channelId", "senderId", "senderName", "senderAvatar", "senderColor", "text", "timestamp", "effects", "reactions", "spamMultiplier", "isSaved"]
+    },
+    "UserProfile": {
+      "properties": {
+        "id": { "type": "string" },
+        "username": { "type": "string" },
+        "discriminator": { "type": "string" },
+        "avatarEmoji": { "type": "string" },
+        "avatarColor": { "type": "number" },
+        "customStatus": { "type": "string" },
+        "qrPayload": { "type": "string" }
+      },
+      "required": ["id", "username", "discriminator", "avatarEmoji", "avatarColor", "customStatus", "qrPayload"]
+    }
+  },
+  "collections": {
+    "users": {
+      "document": "{userId}",
+      "entity": "UserProfile"
+    },
+    "channels": {
+      "document": "{channelId}",
+      "subcollections": {
+        "messages": {
+          "document": "{messageId}",
+          "entity": "Message"
+        }
+      }
+    }
+  }
+}

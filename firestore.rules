@@ -1,0 +1,61 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isValidUserProfile(data) {
+      return data.id is string
+        && data.username is string && data.username.size() > 0 && data.username.size() <= 64
+        && data.discriminator is string
+        && data.avatarEmoji is string
+        && data.avatarColor is number
+        && data.customStatus is string
+        && data.qrPayload is string;
+    }
+
+    function isValidMessage(data) {
+      return data.id is string
+        && data.channelId is string
+        && data.senderId is string
+        && data.senderName is string
+        && data.senderAvatar is string
+        && data.senderColor is number
+        && data.text is string
+        && data.timestamp is number
+        && data.effects is list
+        && data.reactions is map
+        && data.spamMultiplier is number
+        && data.isSaved is bool
+        && (!('photoUri' in data) || data.photoUri == null || data.photoUri is string)
+        && (!('fileName' in data) || data.fileName == null || data.fileName is string)
+        && (!('fileSize' in data) || data.fileSize == null || data.fileSize is string)
+        && (!('fileUri' in data) || data.fileUri == null || data.fileUri is string);
+    }
+
+    // User Profiles
+    match /users/{userId} {
+      allow read: if isAuthenticated();
+      allow create, update: if isOwner(userId) && isValidUserProfile(request.resource.data);
+      allow delete: if isOwner(userId);
+    }
+
+    // Channel Messages (Public / group channels visible to everyone)
+    match /channels/{channelId}/messages/{messageId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated()
+        && request.resource.data.senderId == request.auth.uid
+        && isValidMessage(request.resource.data);
+      allow update: if isAuthenticated()
+        && isValidMessage(request.resource.data)
+        && (resource.data.senderId == request.auth.uid || request.resource.data.diff(resource.data).affectedKeys().hasOnly(['reactions']));
+      allow delete: if isAuthenticated() && resource.data.senderId == request.auth.uid;
+    }
+  }
+}
