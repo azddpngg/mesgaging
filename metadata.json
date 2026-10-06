@@ -1,6 +1,6 @@
 {
   "name": "mesgaging",
-  "description": "High-octane Discord-inspired chat app where connection is QR-exclusive. Loaded with chaotic message effects, unlimited effect spam, text-to-speech, emoji burst animations, and a persistent text saving vault.",
+  "description": "yo yes im a messaging app i guess",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
