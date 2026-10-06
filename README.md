@@ -3,3 +3,6 @@ nothing else,
 yes,
 but 
 you need an gmail account to use it ;D
+
+
+PS: GITHUB MADE BY AI, FIREBASE IS ALSO AI.
